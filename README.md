@@ -83,6 +83,13 @@ This project follows a step-by-step and learner-centered approach:
 
 ---
 
+## Online Version
+
+You can read the material online here:  
+https://oguzhanisilay8.github.io/Short-Topic-Summary-for-if-else/
+
+
+
 ## License
 
 This project is released under the MIT License.
