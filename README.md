@@ -67,8 +67,8 @@ No external packages are required.
 
 ## Files
 
-- `Short Topic Summary: for + if / else.Rmd`  
-- `Short Topic Summary: for + if / else.pdf`  
+- `Short Topic Summary: for + if / else.Rmd` — The source document  
+- `Short Topic Summary: for + if / else.pdf` — Compiled PDF output
 
 ---
 
