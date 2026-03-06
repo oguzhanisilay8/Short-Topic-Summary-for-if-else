@@ -1,0 +1,312 @@
+---
+title: "Short Topic Summary: for + if/else"
+author: "Oğuzhan Işılay"
+date: "2026-01-12"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# Short Topic Summary: for + if/else
+
+## 1. For Loop
+
+In R, a **for loop** allows us to repeat the same operation for multiple values.
+
+Example structure:
+
+```{r}
+items <- c(1,2,3)
+
+for (i in items) {
+  # operation to be performed on each item
+}
+```
+
+
+items → a vector or list containing multiple values  
+i → represents one value from the list during each iteration
+
+The loop follows this logic:
+
+Take each element inside **items**, one by one, and execute the code inside the loop.
+
+Example vector:
+
+```{r}
+leaf_lengths <- c(3.2, 5.1, 4.0)
+```
+
+
+The function **c()** means *combine*.  
+It combines multiple values into a vector.
+
+Here we created a vector named **leaf_lengths**.
+
+Now we can print each value using a loop:
+
+```{r}
+for (u in leaf_lengths) {
+  print(u)
+}
+```
+
+
+The computer will:
+
+First iteration → print first value  
+Second iteration → print second value  
+Third iteration → print third value  
+
+The loop stops when the vector ends.
+
+---
+
+### Creating an Empty Vector
+
+Sometimes we need a place to store results.
+
+```{r}
+results <- c()
+```
+
+
+This creates an **empty vector**.
+
+Daily life analogy:
+
+Imagine an empty basket where we will place our results.
+
+Now we process the data:
+
+```{r}
+for (u in leaf_lengths) {
+  results <- c(results, u * 2)
+  print(results)
+}
+```
+
+
+What happens here?
+
+Each value of **leaf_lengths** is taken one by one.  
+Each value is multiplied by 2.  
+The result is added to the **results** vector.
+
+So the loop is:
+
+Take value → process it → store the result.
+
+This structure is very common in biological data analysis.
+
+---
+
+# 2. if / else
+
+The **if / else** structure allows the computer to make decisions.
+
+Basic logic:
+
+If something is true → do one thing  
+Otherwise → do another thing
+
+General structure:
+
+'if (condition) {
+  # code if true
+}'
+
+The condition must return **TRUE** or **FALSE**.
+
+Example:
+
+```{r}
+leaf_length <- 6
+
+if (leaf_length > 5) {
+  print("Long leaf")
+}
+
+```
+
+Since 6 > 5 is TRUE, the message is printed.
+
+If the value was 4, the condition would be FALSE and nothing would happen.
+
+---
+
+### if / else structure
+
+'if (condition) {
+  # if true
+} else {
+  # if false
+}'
+
+Example:
+
+```{r}
+leaf_length <- 4
+
+if (leaf_length > 5) {
+  print("Long leaf")
+} else {
+  print("Short leaf")
+}
+
+```
+
+Since 4 > 5 is FALSE, the **else** block runs.
+
+Output:
+
+Short leaf
+
+---
+
+### Multiple Conditions
+
+Sometimes we need more than two conditions.
+
+```{r}
+if (leaf_length < 3) {
+  print("Very short")
+} else if (leaf_length < 6) {
+  print("Medium")
+} else {
+  print("Long")
+}
+
+```
+
+The computer checks conditions step by step.
+
+First condition  
+If FALSE → move to next condition  
+Continue until one condition becomes TRUE.
+
+---
+
+# 3. Using for with if / else
+
+Often we combine **loops** and **conditions**.
+
+for → processes values one by one  
+if / else → decides what to do with each value
+
+Example:
+
+```{r}
+leaves <- c(2.5, 4.8, 6.1)
+
+for (u in leaves) {
+  if (u > 5) {
+    print("Long leaf")
+  } else {
+    print("Short leaf")
+  }
+}
+
+```
+
+The logic is:
+
+Take a leaf  
+Check its length  
+Print the classification  
+Move to the next leaf
+
+This represents the core logic behind many biological data analyses.
+
+---
+
+# Mini Example: GC% and Motif Analysis in DNA Sequences
+
+## Example 1: Checking GC Content in a DNA Sequence
+
+We examine whether each nucleotide forms a **GC strong bond** or an **AT weak bond**.
+
+```{r}
+DNA_sequence <- c("A", "G", "C", "T", "G")
+
+for (nucleotide in DNA_sequence) {
+
+  if (nucleotide == "G" | nucleotide == "C") {
+    print(paste(nucleotide, ": GC Strong Bond"))
+  } else {
+    print(paste(nucleotide, ": AT Weak Bond"))
+  }
+
+}
+```
+
+
+---
+
+## Example 2: Simple Motif Search
+
+We have several DNA regions and want to detect the **start codon (ATG)**.
+
+```{r}
+regions <- c("CCG", "ATG", "TTA", "ATG")
+
+for (i in 1:length(regions)) {
+
+  if (regions[i] == "ATG") {
+    print(paste(i, ". region contains a start codon!"))
+  } else {
+    print(paste(i, ". region is clean."))
+  }
+
+}
+```
+
+
+---
+
+## Example 3: GC Ratio Calculation
+
+We count how many **G** and **C** bases exist in the sequence.
+
+```{r}
+dna <- c("G", "C", "A", "T", "G", "G", "A")
+
+gc_number <- 0
+
+for (n in dna) {
+  if (n == "G" | n == "C") {
+    gc_number <- gc_number + 1
+  }
+}
+
+total_length <- length(dna)
+
+gc_ratio <- (gc_number / total_length) * 100
+
+print(paste("Total GC Count:", gc_number))
+print(paste("GC Ratio:", gc_ratio, "%"))
+```
+
+
+---
+
+## Example 4: Multiple Conditions (Temperature and Enzyme Activity)
+
+We evaluate enzyme activity at different temperatures.
+
+```{r}
+temperatures <- c(10, 37, 55, 90)
+
+for (t in temperatures) {
+
+  if (t < 20) {
+    print(paste(t, "degrees: Enzyme is very slow."))
+  } else if (t >= 20 & t <= 45) {
+    print(paste(t, "degrees: Optimum working temperature."))
+  } else {
+    print(paste(t, "degrees: Enzyme structure may be damaged (Denaturation)."))
+  }
+
+}
+```
+
